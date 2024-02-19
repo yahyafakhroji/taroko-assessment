@@ -1,0 +1,38 @@
+.btn {
+  display: inline-flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: solid 1px transparent;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  height: 40px;
+  cursor: pointer;
+  gap: 6px;
+  box-shadow: var(--button-shadow);
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    line-height: 1.5;
+
+    svg {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  &.primary {
+    background-color: var(--primary-color);
+    color: var(--foreground-color);
+
+    &:hover {
+      background-color: var(--dark-primary-color);
+    }
+  }
+}
