@@ -1,10 +1,37 @@
-.container {
+.wrap {
   display: flex;
+  flex-direction: column;
   gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
+  height: 100%;
+  margin: 0 auto;
+  /* Center the container */
 
-  > div {
-    max-width: 320px;
+  .filter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    .searchbar {
+      max-width: 300px;
+    }
+
+    .sort {
+      background-color: var(--foreground-color);
+      padding: 4px 10px;
+      border: solid 1px var(--border-color);
+
+      svg {
+        fill: var(--black-color);
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .content {
+    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    overflow-y: auto;
   }
 }

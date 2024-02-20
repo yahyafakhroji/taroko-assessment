@@ -9,6 +9,7 @@
     padding: 14px 24px;
     justify-content: space-between;
     border-bottom: solid 1px var(--border-color);
+    height: 70px;
     
     .title {
       font-weight: bold;
@@ -30,5 +31,6 @@
 
   .content {
     flex: 1;
+    max-height: calc(100vh - 70px);
   }
 }
