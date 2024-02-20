@@ -7,10 +7,11 @@
     display: flex;
     align-items: center;
     padding: 20px 24px;
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    // position: sticky;
+    // top: 0;
+    // z-index: 999;
     justify-content: space-between;
+    border-bottom: solid 1px var(--border-color);
     
     .title {
       font-weight: bold;
@@ -28,5 +29,10 @@
         font-weight: 500;
       }
     }
+  }
+
+  .content {
+    flex: 1;
+    padding: 24px;
   }
 }
