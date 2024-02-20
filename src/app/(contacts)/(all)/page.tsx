@@ -1,9 +1,15 @@
-import styles from './style.module.scss';
+import ContactCard from '@components/contact-card/contact-card.component';
+
+import style from './style.module.scss';
 
 export default function All() {
+  const dummy = new Array(10).fill(0);
+
   return (
-    <main className={styles.main}>
-      <h2>All</h2>
-    </main>
+    <div className={style.container}>
+      {dummy.map((val, index) => {
+        return <ContactCard key={`contact_${index + 1}`} />;
+      })}
+    </div>
   );
 }

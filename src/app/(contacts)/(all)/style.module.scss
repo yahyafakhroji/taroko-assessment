@@ -1,6 +1,10 @@
-.main {
+.container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  > div {
+    max-width: 320px;
+  }
 }

@@ -1,15 +1,19 @@
 :root {
   --foreground-color: #fff;
-  --primary-color: #3872fa;
   --border-color: #e3e3e3;
+
+  --primary-color: #3872fa;
+  --dark-primary-color: #1d58d8;
+  
+  --danger-color: #ee0000;
+  --dark-danger-color: #c50000;
 
   --black-color: #333;
   --black-2-color: #111;
   
   --grey-color: #666666;
   --grey-2-color: #f1f1f1;
-
-  --dark-primary-color: #1d58d8;
+  --grey-3-color: #f4f4f5;
 
   --card-shadow: 0 1px 0 rgba(0, 0, 0, .02), 0 2px 6px rgba(0, 0, 0, .05);
   --button-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);

@@ -9,43 +9,33 @@
     gap: 16px;
     width: 100%;
     overflow-x: auto;
-    border-bottom: solid 1px var(--border-color);
-    color: var(--grey-color);
+    // border-bottom: solid 1px var(--border-color);
+    background-color: var(--grey-3-color);
+    justify-content: center;
 
     .tab {
       padding: 10px 0;
-      white-space: nowrap;
       cursor: pointer;
-      font-size: 14px;
-      line-height: 20px;
-      color: var(--grey-color);
       position: relative;
 
       span {
         padding: 6px 10px;
         border-radius: 6px;
         transition: all 0.3s ease-in-out;
-      }
-
-      &::before {
-        content: ' ';
-        transition: all 0.3s ease-in-out;
-        opacity: 0;
-        background-color: var(--black-2-color);
-        height: 2px;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        visibility: hidden;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--grey-color);
+        white-space: nowrap;
       }
 
       &.active {
-        color: var(--black-2-color);
         pointer-events: none;
 
-        &::before {
-          opacity: 1;
-          visibility: visible;
+        span {
+          color: var(--black-2-color);
+          background-color: var(--foreground-color);
+          box-shadow: var(--card-shadow);
         }
       }
 
