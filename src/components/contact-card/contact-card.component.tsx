@@ -1,22 +1,13 @@
 import IconStar from '@components/icons/star';
 import type { ContactListModal } from '@interfaces/contact.interface';
 import { favoritesAtom } from '@states/favorite.state';
+import { generateInitialName } from '@utils/initial-name';
 import { useSetAtom } from 'jotai';
 
 import style from './contact-card.module.scss';
 
 export default function ContactCard({ data, footer }: { data: ContactListModal; footer?: React.ReactNode }) {
   const setFavorite = useSetAtom(favoritesAtom);
-
-  const getInitials = (fullName: string, includeMiddleName = false): string => {
-    if (!fullName) return '';
-
-    const names = fullName.trim().split(/\s+/);
-
-    return includeMiddleName
-      ? names.map((name) => name.charAt(0)).join('')
-      : names[0].charAt(0) + (names.length > 1 ? names[names.length - 1].charAt(0) : '');
-  };
 
   const changeFavorite = (value: boolean) => {
     if (value) {
@@ -33,7 +24,7 @@ export default function ContactCard({ data, footer }: { data: ContactListModal; 
       <div className={style.card}>
         <div className={style.head}>
           <div className={style.profile}>
-            <span className={style.avatar}>{getInitials(data?.full_name || '')}</span>
+            <span className={style.avatar}>{generateInitialName(data?.full_name || '')}</span>
             <p>
               <span className={style.name}>{data.full_name}</span>
               <span className={style.job}>{data.job}</span>

@@ -18,6 +18,7 @@ export const fetchContactAtom = atomWithQuery<ContactListModal[]>((get) => ({
       full_name: `${val.first_name} ${val.last_name}`,
     }));
 
+    // return sortByString('full_name', 'asc', modified);
     return modified;
   },
 }));
