@@ -6,6 +6,7 @@ import IconPencil from '@components/icons/pencil';
 import IconSortAsc from '@components/icons/sort-asc';
 import IconSortDesc from '@components/icons/sort-desc';
 import IconTrash from '@components/icons/trash';
+import Loader from '@components/loader/loader.component';
 import SearchWidget from '@components/search/search.component';
 import Button from '@components/ui/button/button.component';
 import type { ContactListModal } from '@interfaces/contact.interface';
@@ -18,6 +19,7 @@ import type { Atom } from 'jotai';
 import { useAtom, useSetAtom } from 'jotai';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 
 import style from './contact-list.module.scss';
 
@@ -37,7 +39,7 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
   const [filteredData, setFilteredData] = useState<ContactListModal[]>([]);
 
   const [{ data, refetch, status }] = useAtom(atom);
-  const [{ mutate: deleteAct, status: deleteStatus }] = useAtom(deleteContactAtom);
+  const [{ mutate: deleteAct, status: deleteStatus, error: deleteError }] = useAtom(deleteContactAtom);
   const setFavorite = useSetAtom(favoritesAtom);
 
   useEffect(() => {
@@ -45,12 +47,6 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
       setIsLoading(false);
     }
   }, [status]);
-
-  const doDelete = async () => {
-    if (selected) {
-      await deleteAct(selected?.id);
-    }
-  };
 
   useEffect(() => {
     if (deleteStatus === 'success') {
@@ -64,8 +60,14 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
       refetch();
 
       deleteModal.current?.close();
+
+      toast.success('Contact deleted successfully!', { id: String(Date.now()) });
     }
-  }, [deleteStatus]);
+
+    if (deleteError) {
+      toast.error('Contact deleted failed!', { id: String(Date.now()) });
+    }
+  }, [deleteStatus, deleteError]);
 
   /*
    * Handle Filter And Searching.
@@ -153,7 +155,7 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
       </div>
       <div className={style.content}>
         {isLoading ? (
-          <span>Loading...</span>
+          <Loader />
         ) : (
           (filteredData || []).map((val: ContactListModal) => {
             return (
@@ -185,7 +187,11 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
         ref={deleteModal}
         title="Delete Contact"
         message="Are you sure to Delete this Contact ?"
-        onDelete={() => doDelete()}
+        onDelete={() => {
+          if (selected) {
+            deleteAct(selected?.id);
+          }
+        }}
       />
     </div>
   );

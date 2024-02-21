@@ -3,6 +3,7 @@ import type { ContactListModal } from '@interfaces/contact.interface';
 import { favoritesAtom } from '@states/favorite.state';
 import { generateInitialName } from '@utils/initial-name';
 import { useSetAtom } from 'jotai';
+import toast from 'react-hot-toast';
 
 import style from './contact-card.module.scss';
 
@@ -13,9 +14,12 @@ export default function ContactCard({ data, footer }: { data: ContactListModal; 
     if (value) {
       // Add New ID as Favorite Contact
       setFavorite((prev) => [...prev, data.id]);
+
+      toast.success('Favorite contact added successfully!', { id: String(Date.now()) });
     } else {
       // Remove ID as Favorite Contact
       setFavorite((prev) => prev.filter((vl) => vl !== data.id));
+      toast.success('Favorite contact removed successfully!', { id: String(Date.now()) });
     }
   };
 
