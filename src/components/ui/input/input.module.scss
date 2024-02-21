@@ -38,7 +38,8 @@
     font-size: 14px;
 
 
-    &:focus {
+    &:focus,
+    &:focus-visible {
       outline: none;
     }
 

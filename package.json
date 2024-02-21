@@ -10,9 +10,13 @@
     "format": "next lint --fix && prettier \"src/**/*.ts{,x}\" --write"
   },
   "dependencies": {
+    "@tanstack/query-core": "^5.22.2",
+    "jotai": "^2.6.4",
+    "jotai-tanstack-query": "^0.8.5",
     "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "wonka": "^6.3.4"
   },
   "devDependencies": {
     "@types/node": "^20",

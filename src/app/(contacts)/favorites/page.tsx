@@ -1,7 +1,8 @@
+'use client';
+
+import ContactList from '@components/contact-list/contact-list.component';
+import { favContactAtom } from '@states/contact.state';
+
 export default function Favorites() {
-  return (
-    <div>
-      <h2>Favorites</h2>
-    </div>
-  );
+  return <ContactList atom={favContactAtom} />;
 }

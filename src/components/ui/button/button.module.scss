@@ -10,6 +10,11 @@
   gap: 6px;
   box-shadow: var(--button-shadow);
 
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+
   .icon {
     display: flex;
     align-items: center;
@@ -81,5 +86,11 @@
   &.ghost {
     background-color: transparent;
     box-shadow: none;
+  }
+
+  &.outline {
+    background-color: transparent;
+    box-shadow: none;
+    border: solid 1px var(--border-color);
   }
 }

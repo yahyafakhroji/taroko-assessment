@@ -4,16 +4,29 @@ import style from './modal.module.scss';
 
 interface Props {
   isOpen: boolean;
+  title?: string;
   children: React.ReactNode;
+  onClose?: () => void;
 }
 
-export default function Modal({ isOpen, children }: Props) {
+export default function Modal({ isOpen, title, children, onClose }: Props) {
   const modalRef = useRef<HTMLDialogElement | null>(null);
 
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const closeModal = () => {
+    const modalElement = modalRef.current;
+
+    if (modalElement) {
+      setIsModalOpen(false);
+      modalElement.close();
+
+      onClose?.();
+    }
+  };
 
   useEffect(() => {
-    setModalOpen(isOpen);
+    setIsModalOpen(isOpen);
   }, [isOpen]);
 
   useEffect(() => {
@@ -29,27 +42,28 @@ export default function Modal({ isOpen, children }: Props) {
           rect.top > event.clientY ||
           rect.bottom < event.clientY
         ) {
-          modalElement.close();
+          closeModal();
         }
       });
 
       if (isModalOpen) {
         modalElement.showModal();
       } else {
-        modalElement.close();
+        closeModal();
       }
     }
   }, [isModalOpen]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
     if (event.key === 'Escape') {
-      setModalOpen(false);
+      closeModal();
     }
   };
 
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <dialog ref={modalRef} className={style.modal} onKeyDown={handleKeyDown}>
+      {title && <h3 className={style.title}>{title}</h3>}
       {children}
     </dialog>
   );
