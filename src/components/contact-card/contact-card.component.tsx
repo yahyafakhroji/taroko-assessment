@@ -16,7 +16,7 @@ export default function ContactCard() {
             <span className={style.job}>Designer</span>
           </p>
         </div>
-        <div className={`${style.favorite} `}>
+        <div className={`${style.favorite} ${style.active}`}>
           <IconStar active />
         </div>
       </div>

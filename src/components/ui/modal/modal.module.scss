@@ -1,0 +1,39 @@
+.modal {
+  padding: 24px 28px;
+  border-radius: 12px;
+  background-color: var(--foreground-color);
+  width: 100%;
+  // margin: 0 auto;
+  max-width: 512px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  visibility: none;
+
+  &[open] {
+    visibility: visible;
+    animation: fadein 0.1s ease-in forwards;
+  }
+
+  &::backdrop {
+    background-color: rgb(0 0 0 / 0.6);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
