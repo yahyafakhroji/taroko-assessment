@@ -7,7 +7,7 @@ import { favoritesAtom } from './favorite.state';
 const CONTACT_API = 'http://localhost:3000/api/contacts';
 
 export const fetchContactAtom = atomWithQuery<ContactListModal[]>((get) => ({
-  queryKey: ['contact', get(favoritesAtom)],
+  queryKey: ['get-contact', get(favoritesAtom)],
   queryFn: async ({ queryKey: [_, favorites] }) => {
     const res = await fetch(CONTACT_API);
     const obj = await res.json();
@@ -18,7 +18,6 @@ export const fetchContactAtom = atomWithQuery<ContactListModal[]>((get) => ({
       full_name: `${val.first_name} ${val.last_name}`,
     }));
 
-    // return sortByString('full_name', 'asc', modified);
     return modified;
   },
 }));
@@ -32,22 +31,27 @@ export const favContactAtom = atom((get) => {
 });
 
 export const postContactAtom = atomWithMutation(() => ({
-  mutationKey: ['contact'],
-  mutationFn: async () => {
+  mutationKey: ['post-contact'],
+  mutationFn: async (payload: Partial<ContactModel>) => {
     const res = await fetch(CONTACT_API, {
       method: 'POST',
       body: JSON.stringify({
         contact: {
-          first_name: 'Test',
-          last_name: 'test',
-          job: 'test',
-          description: 'test',
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          job: payload.job || '',
+          description: payload.description || '',
         },
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
+
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+
     const data = await res.json();
 
     return data;
@@ -58,10 +62,41 @@ export const postContactAtom = atomWithMutation(() => ({
 }));
 
 export const deleteContactAtom = atomWithMutation(() => ({
-  mutationKey: ['contact'],
+  mutationKey: ['delete-contact'],
   mutationFn: async (id: number) => {
     const res = await fetch(`${CONTACT_API}/${id}`, {
       method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+
+    const data = await res.json();
+
+    return data;
+  },
+  onError: (error) => {
+    throw error;
+  },
+}));
+
+export const editContactAtom = atomWithMutation(() => ({
+  mutationKey: ['edit-contact'],
+  mutationFn: async (payload: Partial<ContactModel>) => {
+    const res = await fetch(`${CONTACT_API}/${payload.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        info: {
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          job: payload.job || '',
+          description: payload.description || '',
+        },
+      }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },

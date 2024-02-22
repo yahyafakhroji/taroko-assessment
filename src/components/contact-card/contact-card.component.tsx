@@ -15,11 +15,11 @@ export default function ContactCard({ data, footer }: { data: ContactListModal; 
       // Add New ID as Favorite Contact
       setFavorite((prev) => [...prev, data.id]);
 
-      toast.success('Favorite contact added successfully!', { id: String(Date.now()) });
+      toast.success('Favorite contact added successfully!', { id: 'favorite-added' });
     } else {
       // Remove ID as Favorite Contact
       setFavorite((prev) => prev.filter((vl) => vl !== data.id));
-      toast.success('Favorite contact removed successfully!', { id: String(Date.now()) });
+      toast.success('Favorite contact removed successfully!', { id: 'favorite-removed' });
     }
   };
 

@@ -38,7 +38,7 @@ const DeleteConfirmation: React.ForwardRefRenderFunction<FuncProps, IProps> = (
 
         <div className={style.actions}>
           <Button
-            type="ghost"
+            color="ghost"
             label="Cancel"
             onClick={() => {
               setIsOpen(false);
@@ -47,7 +47,7 @@ const DeleteConfirmation: React.ForwardRefRenderFunction<FuncProps, IProps> = (
             }}
           />
           <Button
-            type="danger"
+            color="danger"
             label="Delete"
             onClick={() => {
               onDelete?.();

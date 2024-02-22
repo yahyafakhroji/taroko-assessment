@@ -1,25 +1,40 @@
+import Loader from '@components/loader/loader.component';
+
 import style from './button.module.scss';
 
 interface Props {
-  type?: 'primary' | 'danger' | 'success' | 'ghost' | 'outline' | undefined;
+  type?: 'submit' | 'button';
+  color?: 'primary' | 'danger' | 'success' | 'ghost' | 'outline' | undefined;
   label?: string;
   className?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg';
   prefixIcon?: React.ReactNode;
+  disabled?: boolean;
   isLoading?: boolean;
   onClick?: () => void;
 }
 
-export default function Button({ label, className, prefixIcon, type = 'primary', size = 'md', isLoading, onClick }: Props) {
+export default function Button({
+  type = 'button',
+  label,
+  className,
+  prefixIcon,
+  color = 'primary',
+  size = 'md',
+  isLoading,
+  disabled,
+  onClick,
+}: Props) {
   return (
     <button
-      disabled={isLoading}
-      type="button"
-      className={`${style.btn} ${style[type]} ${style[size]} ${className || ''}`}
+      disabled={disabled || isLoading}
+      // eslint-disable-next-line react/button-has-type
+      type={type}
+      className={`${style.btn} ${style[color]} ${style[size]} ${className || ''}`}
       onClick={() => onClick?.()}
     >
       {isLoading ? (
-        'Loading...'
+        <Loader />
       ) : (
         <>
           {prefixIcon && <div className={style.icon}>{prefixIcon}</div>}

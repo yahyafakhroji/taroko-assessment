@@ -1,7 +1,8 @@
 'use client';
 
 import ContactCard from '@components/contact-card/contact-card.component';
-import DeleteConfirmationComponent from '@components/delete-confirmation/delete-confirmation.component';
+import ContactForm from '@components/contact-form/contact-form.component';
+import DeleteConfirmation from '@components/delete-confirmation/delete-confirmation.component';
 import IconPencil from '@components/icons/pencil';
 import IconSortAsc from '@components/icons/sort-asc';
 import IconSortDesc from '@components/icons/sort-desc';
@@ -29,11 +30,12 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
   const pathname = usePathname();
 
   const [selected, setSelected] = useState<ContactListModal>();
-  const deleteModal = useRef<React.ElementRef<typeof DeleteConfirmationComponent>>(null);
+  const deleteModal = useRef<React.ElementRef<typeof DeleteConfirmation>>(null);
+  const editModal = useRef<React.ElementRef<typeof ContactForm>>(null);
 
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined);
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>();
   const [filters, setFilters] = useState<Record<string, any>>();
 
   const [filteredData, setFilteredData] = useState<ContactListModal[]>([]);
@@ -61,11 +63,11 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
 
       deleteModal.current?.close();
 
-      toast.success('Contact deleted successfully!', { id: String(Date.now()) });
+      toast.success('Contact deleted successfully!', { id: 'contact-deleted' });
     }
 
     if (deleteError) {
-      toast.error('Contact deleted failed!', { id: String(Date.now()) });
+      toast.error('Contact deleted failed!', { id: 'contact-deleted-failed' });
     }
   }, [deleteStatus, deleteError]);
 
@@ -146,10 +148,10 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
           }}
         />
         <Button
-          prefixIcon={sortOrder === 'asc' ? <IconSortAsc /> : <IconSortDesc />}
+          prefixIcon={sortOrder === 'desc' ? <IconSortDesc /> : <IconSortAsc />}
           className={style.sort}
           onClick={() => {
-            setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+            setSortOrder((prev) => (prev === 'desc' || typeof prev === 'undefined' ? 'asc' : 'desc'));
           }}
         />
       </div>
@@ -157,10 +159,10 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
         {isLoading ? (
           <Loader />
         ) : (
-          (filteredData || []).map((val: ContactListModal) => {
+          (filteredData || []).map((val: ContactListModal, idx) => {
             return (
               <ContactCard
-                key={`contact_${val.id}`}
+                key={`contact_${val.id}_${idx + 1}`}
                 data={val}
                 footer={
                   <>
@@ -168,13 +170,22 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
                       label="Delete"
                       size="sm"
                       prefixIcon={<IconTrash />}
-                      type="danger"
+                      color="danger"
                       onClick={() => {
                         setSelected(val);
                         deleteModal.current?.open();
                       }}
                     />
-                    <Button label="Edit" size="sm" prefixIcon={<IconPencil />} type="primary" />
+                    <Button
+                      label="Edit"
+                      size="sm"
+                      prefixIcon={<IconPencil />}
+                      color="primary"
+                      onClick={() => {
+                        setSelected(val);
+                        editModal.current?.open();
+                      }}
+                    />
                   </>
                 }
               />
@@ -183,16 +194,18 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
         )}
       </div>
 
-      <DeleteConfirmationComponent
+      <DeleteConfirmation
         ref={deleteModal}
         title="Delete Contact"
         message="Are you sure to Delete this Contact ?"
         onDelete={() => {
-          if (selected) {
+          if (selected && selected.id) {
             deleteAct(selected?.id);
           }
         }}
       />
+
+      <ContactForm ref={editModal} title="Edit Contact" record={selected} />
     </div>
   );
 }

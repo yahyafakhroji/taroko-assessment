@@ -24,6 +24,7 @@ export default function SearchWidget({
 
   return (
     <Input
+      name="search"
       value={term}
       className={`${style.container} ${className || ''}`}
       placeholder="Search Here"
