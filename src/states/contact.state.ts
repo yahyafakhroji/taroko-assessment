@@ -10,6 +10,11 @@ export const fetchContactAtom = atomWithQuery<ContactListModal[]>((get) => ({
   queryKey: ['get-contact', get(favoritesAtom)],
   queryFn: async ({ queryKey: [_, favorites] }) => {
     const res = await fetch(CONTACT_API);
+
+    if (!res.ok) {
+      throw new Error('Resource not found');
+    }
+
     const obj = await res.json();
 
     const modified = (obj?.data || []).map((val: ContactModel) => ({
@@ -19,6 +24,9 @@ export const fetchContactAtom = atomWithQuery<ContactListModal[]>((get) => ({
     }));
 
     return modified;
+  },
+  onError: (error: any) => {
+    throw error;
   },
 }));
 

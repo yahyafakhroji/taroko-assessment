@@ -156,42 +156,48 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
         />
       </div>
       <div className={style.content}>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          (filteredData || []).map((val: ContactListModal, idx) => {
-            return (
-              <ContactCard
-                key={`contact_${val.id}_${idx + 1}`}
-                data={val}
-                footer={
-                  <>
-                    <Button
-                      label="Delete"
-                      size="sm"
-                      prefixIcon={<IconTrash />}
-                      color="danger"
-                      onClick={() => {
-                        setSelected(val);
-                        deleteModal.current?.open();
-                      }}
-                    />
-                    <Button
-                      label="Edit"
-                      size="sm"
-                      prefixIcon={<IconPencil />}
-                      color="primary"
-                      onClick={() => {
-                        setSelected(val);
-                        editModal.current?.open();
-                      }}
-                    />
-                  </>
-                }
-              />
-            );
-          })
-        )}
+        {isLoading && <Loader />}
+
+        {!isLoading &&
+          (filteredData.length > 0 ? (
+            (filteredData || []).map((val: ContactListModal, idx) => {
+              return (
+                <ContactCard
+                  key={`contact_${val.id}_${idx + 1}`}
+                  data={val}
+                  footer={
+                    <>
+                      <Button
+                        label="Delete"
+                        size="sm"
+                        prefixIcon={<IconTrash />}
+                        color="danger"
+                        onClick={() => {
+                          setSelected(val);
+                          deleteModal.current?.open();
+                        }}
+                      />
+                      <Button
+                        label="Edit"
+                        size="sm"
+                        prefixIcon={<IconPencil />}
+                        color="primary"
+                        onClick={() => {
+                          setSelected(val);
+                          editModal.current?.open();
+                        }}
+                      />
+                    </>
+                  }
+                />
+              );
+            })
+          ) : (
+            <div className={style.empty}>
+              <h2>No items to display</h2>
+              <p>It looks like there are no items in this list.</p>
+            </div>
+          ))}
       </div>
 
       <DeleteConfirmation
