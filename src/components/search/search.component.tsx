@@ -26,7 +26,8 @@ export default function SearchWidget({
     <Input
       name="search"
       value={term}
-      className={`${style.container} ${className || ''}`}
+      containerClass={style.container}
+      className={`${style.search} ${className || ''}`}
       placeholder="Search Here"
       prefixIcon={<IconSearch />}
       onChange={(event) => {

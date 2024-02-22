@@ -24,4 +24,9 @@
     }
   }
 
+  @media (max-width: 640px) {
+    .section {
+      flex-direction: column;
+    }
+  }
 }

@@ -12,6 +12,7 @@ interface Props {
   required?: boolean;
   placeholder?: string;
   className?: string;
+  containerClass?: string;
   prefixIcon?: React.ReactNode;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -24,6 +25,7 @@ export default function Input({
   placeholder,
   className,
   prefixIcon,
+  containerClass,
   error,
   required,
   onChange,
@@ -32,7 +34,7 @@ export default function Input({
   const [onFocus, setOnFocus] = useState<boolean>(false);
 
   return (
-    <div className={style.container}>
+    <div className={`${style.container} ${containerClass || ''}`}>
       {label && (
         <label htmlFor={name} className={`${required && style.required}`}>
           {label}

@@ -12,6 +12,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   visibility: none;
+  z-index: 9;
 
   &[open] {
     visibility: visible;
@@ -25,6 +26,10 @@
   &:focus,
   &:focus-visible {
     outline: none;
+  }
+
+  @media (max-width: 640px) {
+    max-width: calc(100vw - 48px);
   }
 }
 

@@ -1,4 +1,10 @@
 .container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+.search {
   background-color: var(--grey-3-color) !important;
   border: solid 1px var(--border-color) !important;
+  width: 100%;
 }
