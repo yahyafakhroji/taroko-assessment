@@ -1,5 +1,5 @@
 import IconStar from '@components/icons/star';
-import type { ContactListModal } from '@interfaces/contact.interface';
+import type { ContactListModel } from '@interfaces/contact.interface';
 import { favoritesAtom } from '@states/favorite.state';
 import { generateInitialName } from '@utils/initial-name';
 import { useSetAtom } from 'jotai';
@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 import style from './contact-card.module.scss';
 
-export default function ContactCard({ data, footer }: { data: ContactListModal; footer?: React.ReactNode }) {
+export default function ContactCard({ data, footer }: { data: ContactListModel; footer?: React.ReactNode }) {
   const setFavorite = useSetAtom(favoritesAtom);
 
   const changeFavorite = (value: boolean) => {
@@ -30,18 +30,18 @@ export default function ContactCard({ data, footer }: { data: ContactListModal; 
           <div className={style.profile}>
             <span className={style.avatar}>{generateInitialName(data?.full_name || '')}</span>
             <p>
-              <span className={style.name}>{data.full_name}</span>
-              <span className={style.job}>{data.job}</span>
+              <span className={style.name}>{data?.full_name}</span>
+              <span className={style.job}>{data?.job}</span>
             </p>
           </div>
           <div
-            className={`${style.favorite} ${data.is_favorite && style.active}`}
-            onClick={() => changeFavorite(!data.is_favorite)}
+            className={`${style.favorite} ${data?.is_favorite && style.active}`}
+            onClick={() => changeFavorite(!data?.is_favorite)}
           >
-            <IconStar active={data.is_favorite || false} />
+            <IconStar active={data?.is_favorite || false} />
           </div>
         </div>
-        <div className={style.content}>{data.description}</div>
+        <div className={style.content}>{data?.description}</div>
         {footer && <div className={style.footer}>{footer}</div>}
       </div>
     </>

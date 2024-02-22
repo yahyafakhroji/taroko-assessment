@@ -33,6 +33,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     overflow-y: auto;
+    flex: 1;
+    padding-bottom: 50px;
   }
 
   .empty {

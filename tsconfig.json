@@ -20,7 +20,7 @@
       "@*": ["src/*"],
       "@public/*": ["public/*"],
     },
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types", "node_modules/@testing-library"],
     "plugins": [{ "name": "next" }]
   },
   "include": [
@@ -31,7 +31,9 @@
     "**/*.cjs",
     "**/*.mjs",
     ".next/types/**/*.ts",
-    ".prettier.js"
+    ".prettier.js", 
+    "jest.config.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "types": ["node", "jest", "@testing-library/jest-dom"]
 }

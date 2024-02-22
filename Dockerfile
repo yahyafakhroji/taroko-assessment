@@ -34,6 +34,7 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN pnpm lint
+RUN pnpm test
 RUN pnpm build
 
 # 3. Production image, copy all the files and run next

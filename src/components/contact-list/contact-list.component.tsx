@@ -10,7 +10,7 @@ import IconTrash from '@components/icons/trash';
 import Loader from '@components/loader/loader.component';
 import SearchWidget from '@components/search/search.component';
 import Button from '@components/ui/button/button.component';
-import type { ContactListModal } from '@interfaces/contact.interface';
+import type { ContactListModel } from '@interfaces/contact.interface';
 import { deleteContactAtom } from '@states/contact.state';
 import { favoritesAtom } from '@states/favorite.state';
 import { fuzzySearch } from '@utils/fuzzy-search';
@@ -29,7 +29,7 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [selected, setSelected] = useState<ContactListModal>();
+  const [selected, setSelected] = useState<ContactListModel>();
   const deleteModal = useRef<React.ElementRef<typeof DeleteConfirmation>>(null);
   const editModal = useRef<React.ElementRef<typeof ContactForm>>(null);
 
@@ -38,7 +38,7 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>();
   const [filters, setFilters] = useState<Record<string, any>>();
 
-  const [filteredData, setFilteredData] = useState<ContactListModal[]>([]);
+  const [filteredData, setFilteredData] = useState<ContactListModel[]>([]);
 
   const [{ data, refetch, status }] = useAtom(atom);
   const [{ mutate: deleteAct, status: deleteStatus, error: deleteError }] = useAtom(deleteContactAtom);
@@ -160,7 +160,7 @@ export default function ContactList({ atom }: { atom: Atom<any> }) {
 
         {!isLoading &&
           (filteredData.length > 0 ? (
-            (filteredData || []).map((val: ContactListModal, idx) => {
+            (filteredData || []).map((val: ContactListModel, idx) => {
               return (
                 <ContactCard
                   key={`contact_${val.id}_${idx + 1}`}

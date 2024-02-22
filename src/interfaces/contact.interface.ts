@@ -6,7 +6,7 @@ export interface ContactModel {
   description: string;
 }
 
-export interface ContactListModal extends ContactModel {
+export interface ContactListModel extends ContactModel {
   // Custom Fields
   is_favorite?: boolean;
   full_name?: string;
