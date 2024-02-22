@@ -4,7 +4,7 @@ import { atomWithMutation, atomWithQuery } from 'jotai-tanstack-query';
 
 import { favoritesAtom } from './favorite.state';
 
-const CONTACT_API = 'http://localhost:3000/api/contacts';
+const CONTACT_API = `${process.env.NEXT_PUBLIC_API_URL}/contacts`;
 
 export const fetchContactAtom = atomWithQuery<ContactListModal[]>((get) => ({
   queryKey: ['get-contact', get(favoritesAtom)],
