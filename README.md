@@ -23,14 +23,14 @@ This is a simple CRUD (Create, Read, Update, Delete) application built with Next
 - **Read**: View existing contact in the database.
 - **Update**: Modify existing contact in the database.
 - **Delete**: Remove contact from the database.
-- **Favorite**: Save your favorite contact.
+- **Favorite**: Save your favorite contact in the your localstorage.
 
 ## Getting Started
 
 To get started with this project, follow these steps:
 
 1. Clone this repository to your local machine.
-2. Clone `.env.example` to `.env.local` . 
+2. Clone `.env.example` to `.env.local` .
 3. Install dependencies using `pnpm install`. ([Guide for Setup `pnpm`](https://pnpm.io/installation))
 4. Start the development server using `pnpm dev`.
 5. Visit `http://localhost:3000` in your browser to view the application.
@@ -47,3 +47,4 @@ To get started with this project, follow these steps:
 	- `/styles`: Contains Global CSS stylesheets for styling the application.
 	- `/utils`: Contains utilities function that used in the application. *e.g Generate Initial Name Function*
 - `/public`: Contains static assets such as images, fonts, etc.
+- `/__tests__`: Contains Unit Testing for check the function of the application.
