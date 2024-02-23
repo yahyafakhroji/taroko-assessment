@@ -4,18 +4,16 @@ This is a simple CRUD (Create, Read, Update, Delete) application built with Next
 
 ## Technologies Used
 
--  **Next.js v14 (Typescript)**: Next.js is a React framework that enables server-side rendering, static site generation, and more for React-based web applications. 
--  **React**: React is a JavaScript library for building user interfaces. 
--  **Jotai**: Jotai is a simple and atomic state management library for React. 
--  **Sass**: Sass is a preprocessor scripting language that is interpreted or compiled into CSS.
--  **@tanstack/query-core**: A JavaScript library for fetching, caching, and synchronizing data in React applications. 
--  **Jotai Tanstack Query**: Integration between Jotai and @tanstack/query-core for state management and data fetching. 
--  **React Hot Toast**: React Hot Toast is a minimalistic and flexible toast library for React.
--  **Jest**: A JavaScript testing framework.
--  **ESLint**: A pluggable JavaScript linter.
--  **Prettier**: An opinionated code formatter.
--  **Stylelint**: A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.
--   **Docker**: Docker is a platform for developing, shipping, and running applications using containerization technology.
+- **Next.js v14 (Typescript)**: Next.js is a React framework that enables server-side rendering, static site generation, and more for React-based web applications. 
+- **Jotai**: Jotai is a simple and atomic state management library for React. 
+- **Tanstack Query**: A JavaScript library for fetching, caching, and synchronizing data in React applications. 
+- **React Hot Toast**: React Hot Toast is a minimalistic and flexible toast library for React.
+- **Sass**: Sass is a preprocessor scripting language that is interpreted or compiled into CSS.
+- **Jest**: A JavaScript testing framework.
+- **ESLint**: A pluggable JavaScript linter.
+- **Prettier**: An opinionated code formatter.
+- **Stylelint**: A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.
+- **Docker**: Docker is a platform for developing, shipping, and running applications using containerization technology.
 
 ## Features
 
@@ -24,6 +22,8 @@ This is a simple CRUD (Create, Read, Update, Delete) application built with Next
 - **Update**: Modify existing contact in the database.
 - **Delete**: Remove contact from the database.
 - **Favorite**: Save your favorite contact in the your localstorage.
+- **Sort**: Sort contacts by the name.
+- **Search**: Search contact by name, job or description of the contact.
 
 ## Getting Started
 
